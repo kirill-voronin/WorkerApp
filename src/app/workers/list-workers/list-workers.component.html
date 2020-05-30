@@ -1,0 +1,66 @@
+<div class="col-12 text-left ml-3"><h2>Таблица сотрудников</h2></div>
+<div class="container">
+  <!-- <h4>Фильтры</h4> -->
+  <div class="row mb-3">   
+    <div class="col-3 text-right">
+      <label for="" class="text-right"><h6>Найти сотрудника</h6></label>
+    </div>
+    <div class="col-5">
+      <input 
+      type="text" 
+      class="form-control" 
+      [(ngModel)]="filterNameSurname"
+      placeholder="Фамилия Имя">
+    </div>
+  </div>
+</div>
+<table id="table-id"
+class="table text-center table-striped">
+    <thead>
+      <tr>
+        <th [style.width]="'5%'"  data-sort-method='number'>id</th>
+        <th [style.width]="'15%'">Фамилия</th>
+        <th [style.width]="'15%'">Имя</th>
+        <th [style.width]="'15%'" data-sort-method='date'>Birthday</th>
+        <th [style.width]="'20%'" >Отдел</th>
+        <th [style.width]="'10%'"  class="no-sort" data-sort-method='none'>
+          <button 
+          class="btn btn-primary"
+          (click)="onAddProfile()">
+          Добавить
+        </button>
+        </th>
+        <th [style.width]="'10%'" class="no-sort" data-sort-method='none'>
+          <button 
+          class="btn btn-primary"
+          (click)="onMain()">
+          Главная
+        </button>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let worker of workers |filter:filterNameSurname">
+        <td>{{worker.id}}</td>
+        <td>{{worker.surname}}</td>
+        <td>{{worker.name}}</td>
+        <td>{{getDateWorker(worker.date)}}</td>
+        <td>{{myTypes[worker.type]}}</td>
+        <td>
+            <button 
+            class="btn btn-outline-primary btn-sm"
+            (click)="onEditProfile(worker.id)">
+            Редактировать
+            </button>
+        </td>
+        <td>
+          <button 
+          class="btn btn-outline-danger btn-sm"
+          (click)="onDeleteWorker(worker.id)"
+          >Удалить</button>
+      </td>
+      </tr>
+    </tbody>
+  </table>
+
+  

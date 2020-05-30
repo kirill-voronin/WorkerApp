@@ -1,0 +1,118 @@
+<div class="container mt-2">
+    <h3 *ngIf="id == null">Добавить сотруднка</h3>
+    <h3 *ngIf="id != null">Изменить сотруднка</h3>
+    <form [formGroup]="workerForm">
+        <div class="row ml-1 ">
+            <h5>Личные данные</h5>
+        </div>
+        <div class="row mb-2 gray">
+            <div class="col-2"></div>
+            <div class="col-4">
+                <label for="">
+                    <h6>Фамилия</h6>
+                </label>
+            </div>
+            <div class="col-4">
+                <input type="text" class="form-control" placeholder="Фамилия" formControlName="surname" />
+            </div>
+        </div>
+        <div class="row mb-2 gray">
+            <div class="col-2"></div>
+            <div class="col-4">
+                <label for="">
+                    <h6>Имя</h6>
+                </label>
+            </div>
+            <div class="col-4">
+                <input type="text" class="form-control" placeholder="Имя" formControlName="name" />
+            </div>
+        </div>
+        <div class="row mb-2 gray">
+            <div class="col-2"></div>
+            <div class="col-4">
+                <label for="">
+                    <h6>Отчество</h6>
+                </label>
+            </div>
+            <div class="col-4">
+                <input type="text" class="form-control" placeholder="Отчество" formControlName="patronymic" />
+            </div>
+        </div>
+        <div class="row gray">
+            <div class="col-2"></div>
+            <div class="col-4">
+                <label for="">
+                    <h6>Дата рождения</h6>
+                </label>
+            </div>
+            <div class="col-4">
+                <input type="date" class="form-control" placeholder="Дата рождения"
+                    formControlName="date" />
+            </div>
+        </div>
+        <div class="row ml-1">
+            <h5>Контактная информация</h5>
+        </div>
+        <div class="row mt-2 gray">
+            <div class="col-2"></div>
+            <div class="col-4">
+                <label for="">
+                    <h6>Телефон</h6>
+                </label>
+            </div>
+            <div class="col-4">
+                <input [textMask]="{mask: telephoneMask}" type="text" class="form-control" placeholder="Телефон"
+                    formControlName="phone" />
+            </div>  
+        </div>
+        <div class="row mt-2 gray">
+            <div class="col-2"></div>
+            <div class="col-4">
+                <label for="">
+                    <h6>Email</h6>
+                </label>
+            </div>
+            <div class="col-4">
+                
+                <input type="text" class="form-control" placeholder="Email" formControlName="email" />
+            </div>
+            
+        </div>
+        <div class="row ml-1">
+            <h5>В компании</h5>
+        </div>   
+
+        <div class="row mt-2 gray">
+            <div class="col-2"></div>
+            <div class="col-4">
+                <label for=""><h6>Id</h6></label>
+            </div>
+            <div class="col-4">
+                <input type="number" class="form-control" placeholder="id" formControlName="id"/>
+            </div>   
+        </div>
+        <div class="row mt-2 gray">
+            <div class="col-2"></div>
+            <div class="col-4">
+                <h6>Отдел</h6>
+            </div>
+            <div class="col-4">
+                <select class="custom-select" formControlName="type">
+                    <option [ngValue]="workerType.it">IT-отдел</option>
+                    <option [ngValue]="workerType.sales">Отдел продаж</option>
+                    <option [ngValue]="workerType.delivery">Отдел доставки</option>
+                    <option [ngValue]="workerType.lawyer">Юридический отдел</option>
+                </select>
+            </div>
+        </div>
+        <div class="row my-2">
+            
+            <button class="btn btn-primary mr-2" (click)="addWorker()"
+                [disabled]="workerForm.invalid">Сохранить</button>
+            <button *ngIf="id != null" class="btn btn-danger mr-2" (click)="onDeleteWorker()">Удалить</button>
+            <button class="btn btn-outline-primary" (click)="onBackWorkerTable()">К списку сотрудников</button>
+            <button *ngIf="id != null" class="btn btn-outline-primary ml-2" (click)="onAddProfile()">Перейти к добавлению</button>
+        </div>
+
+
+    </form>
